@@ -1,7 +1,8 @@
 FROM centos:latest
 MAINTAINER sandunr@gmail.com
-RUN yum update
-RUN yum upgrade
+RUN sudo sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sudo sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+RUN sudo yum update -y
 RUN yum install -y httpd
 RUN yum install -y zip unzip
 ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /var/www/html/
